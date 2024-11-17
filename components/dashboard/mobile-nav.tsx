@@ -1,9 +1,6 @@
 "use client";
 
-import * as React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -11,18 +8,22 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
   BarChart2,
   Clock,
   FileText,
   Home,
+  Menu,
   Receipt,
   Settings,
   Users,
   Wallet,
 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const navigation = [
   { name: "Overview", href: "/dashboard", icon: Home },
@@ -36,7 +37,7 @@ const navigation = [
 ];
 
 export function MobileNav() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -52,7 +53,16 @@ export function MobileNav() {
       </SheetTrigger>
       <SheetContent side="left" className="pl-1 pr-0">
         <SheetHeader>
-          <SheetTitle className="text-2xl font-bold">Lunaris</SheetTitle>
+          <SheetTitle className="text-2xl font-bold">
+            <Link href="/dashboard" className="pl-2 flex items-center space-x-2">
+              <Image
+                src="/lunariss.svg"
+                alt="Lunariss"
+                width={150}
+                height={150}
+              />
+            </Link>
+          </SheetTitle>
         </SheetHeader>
         <div className="mt-8">
           <nav className="grid gap-2 px-2">

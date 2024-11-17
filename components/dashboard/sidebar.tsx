@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   BarChart2,
@@ -9,11 +7,12 @@ import {
   FileText,
   Home,
   Receipt,
-  Settings,
   Users,
   Wallet,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navigation = [
   { name: "Overview", href: "/dashboard", icon: Home },
@@ -23,16 +22,14 @@ const navigation = [
   { name: "Clients", href: "/dashboard/clients", icon: Users },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart2 },
   { name: "Payments", href: "/dashboard/payments", icon: Wallet },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
-export function DashboardNav() {
+export function DashboardSidebar() {
   const pathname = usePathname();
 
   return (
     <nav className="space-y-2 px-4 py-6">
       <div className="mb-8">
-        {/* <span className="text-2xl font-bold">Lunariss</span> */}
         <Link href="/dashboard" className="flex items-center space-x-2">
           <Image src="/lunariss.svg" alt="Lunariss" width={150} height={150} />
         </Link>

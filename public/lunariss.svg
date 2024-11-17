@@ -69,9 +69,9 @@
   
   <!-- Text "Lunariss" -->
   <text
-    x="43"
-    y="28"
-    font-size="24"
+    x="48"
+    y="29"
+    font-size="26"
     font-weight="bold"
     font-family="Arial, sans-serif"
     fill="url(#textGradient)"
