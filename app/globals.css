@@ -2,20 +2,153 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 222 47% 11%;
+    --foreground: 213 31% 91%;
+
+    /* Primary: Deep Purple */
+    --primary: 266 100% 64%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary: Electric Blue */
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 222 47% 11%;
+
+    /* Accent: Neon Pink */
+    --accent: 334 100% 50%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Additional Colors */
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* UI Elements */
+    --card: 222 47% 11%;
+    --card-foreground: 213 31% 91%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 215 20.2% 65.1%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 266 100% 64%;
+    --radius: 0.5rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
+
+/* Gradient Animations */
+.gradient-blur {
+  background: radial-gradient(
+      circle at top left,
+      hsl(266 100% 64% / 0.15),
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      hsl(199 89% 48% / 0.15),
+      transparent 50%
+    );
+  filter: blur(3px);
+}
+
+.text-gradient {
+  background: linear-gradient(
+    to right,
+    hsl(266 100% 64%),
+    hsl(199 89% 48%),
+    hsl(334 100% 50%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.button-gradient {
+  background: linear-gradient(to right, hsl(266 100% 64%), hsl(199 89% 48%));
+  transition: opacity 0.3s ease;
+}
+
+.button-gradient:hover {
+  opacity: 0.9;
+}
+
+/* Spotlight Effect */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(
+    circle at center,
+    hsl(266 100% 64% / 0.1) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Animated Border */
+.animated-border {
+  position: relative;
+  background:
+    linear-gradient(var(--background), var(--background)) padding-box,
+    linear-gradient(to right, hsl(266 100% 64%), hsl(199 89% 48%)) border-box;
+  border: 2px solid transparent;
+  animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+  from {
+    border-image-source: linear-gradient(
+      0deg,
+      hsl(266 100% 64%),
+      hsl(199 89% 48%)
+    );
+  }
+  to {
+    border-image-source: linear-gradient(
+      360deg,
+      hsl(266 100% 64%),
+      hsl(199 89% 48%)
+    );
+  }
+}
+
+/* Floating Animation */
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
