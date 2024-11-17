@@ -1,9 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/db";
 import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 import { z } from "zod";
-
-const prisma = new PrismaClient();
 
 const registerSchema = z.object({
   name: z.string().min(2),

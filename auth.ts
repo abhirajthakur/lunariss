@@ -18,7 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account }) {
-      console.log({ user, account });
+      console.log({user, account});
       if (account?.provider === "email") {
         if (user.email) {
           const existingUser = await prisma.user.findUnique({
