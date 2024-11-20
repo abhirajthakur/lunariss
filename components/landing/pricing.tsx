@@ -9,9 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { loadStripe } from "@stripe/stripe-js";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import Link from "next/link";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+);
 
 const plans = [
   {
@@ -25,6 +29,7 @@ const plans = [
       "Basic reports",
       "Email support",
     ],
+    priceId: "price_starter",
   },
   {
     name: "Professional",
@@ -39,6 +44,7 @@ const plans = [
       "Client portal",
       "Multi-currency",
     ],
+    priceId: "price_professional",
     popular: true,
   },
   {
@@ -54,10 +60,31 @@ const plans = [
       "Custom integrations",
       "99.9% uptime SLA",
     ],
+    priceId: "price_enterprise",
   },
 ];
 
 export function LandingPricing() {
+  const handleSubscribe = async (priceId: string) => {
+    try {
+      const response = await fetch("/api/create-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ priceId }),
+      });
+
+      const data = await response.json();
+
+      if (!data.url) throw new Error("Failed to create checkout session");
+
+      window.location.href = data.url;
+    } catch (error) {
+      console.error("Error initiating payment:", error);
+    }
+  };
+
   return (
     <section id="pricing" className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,7 +119,7 @@ export function LandingPricing() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card
-                className={`relative h-full ${plan.popular ? "border-primary shadow-lg" : ""}`}
+                className={`relative flex flex-col h-full ${plan.popular ? "border-primary shadow-lg" : ""}`}
               >
                 {plan.popular && (
                   <span className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-sm font-medium text-primary-foreground">
@@ -103,8 +130,8 @@ export function LandingPricing() {
                   <CardTitle className="text-2xl">{plan.name}</CardTitle>
                   <CardDescription>{plan.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="grid gap-4">
-                  <div className="text-4xl font-bold">
+                <CardContent className="flex-grow">
+                  <div className="text-4xl font-bold mb-6">
                     {plan.price}
                     <span className="text-lg font-normal text-muted-foreground">
                       /mo
@@ -121,13 +148,13 @@ export function LandingPricing() {
                     ))}
                   </ul>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="mt-auto">
                   <Button
-                    asChild
                     className="w-full"
                     variant={plan.popular ? "default" : "outline"}
+                    onClick={() => handleSubscribe(plan.priceId)}
                   >
-                    <Link href="/signup">Get Started</Link>
+                    Start Trial
                   </Button>
                 </CardFooter>
               </Card>
