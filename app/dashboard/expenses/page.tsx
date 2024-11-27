@@ -5,7 +5,7 @@ import { ExpenseStats } from "@/components/expenses/expense-stats";
 import { ExpensesList } from "@/components/expenses/expenses-list";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ExpensesPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

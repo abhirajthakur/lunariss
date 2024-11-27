@@ -23,6 +23,7 @@ export default function VerifyPage() {
   const searchParams = useSearchParams();
   const { toast } = useToast();
   const email = searchParams.get("email");
+  const priceId = searchParams.get("priceId");
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +45,27 @@ export default function VerifyPage() {
 
       toast({
         title: "Success",
-        description: "Your email has been verified. You can now sign in.",
+        description: "Your email has been verified.",
       });
 
-      router.push("/login");
+      // If there's a priceId, redirect to payment
+      if (priceId) {
+        const paymentResponse = await fetch("/api/create-payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ priceId }),
+        });
+
+        if (!paymentResponse.ok)
+          throw new Error("Failed to create payment session");
+
+        const { url } = await paymentResponse.json();
+        if (url) window.location.href = url;
+      } else {
+        router.push("/login");
+      }
     } catch (error) {
       toast({
         variant: "destructive",

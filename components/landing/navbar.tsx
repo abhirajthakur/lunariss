@@ -157,8 +157,8 @@ export function LandingNavbar() {
                   asChild
                   className="relative overflow-hidden rounded-full bg-gradient-to-r from-primary/90 to-primary/70 hover:from-primary hover:to-primary/80 transition-all duration-300 group/button"
                 >
-                  <Link href="/login">
-                    <span className="relative z-10">Login</span>
+                  <Link href="/signup">
+                    <span className="relative z-10">Get Started</span>
                     <div className="absolute inset-0 rounded-full opacity-0 group-hover/button:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-white/20 to-transparent" />
                   </Link>
                 </Button>
@@ -228,13 +228,6 @@ export function LandingNavbar() {
                 </Link>
               ))}
               <div className="pt-4 space-y-2">
-                <Button
-                  asChild
-                  variant="outline"
-                  className="w-full rounded-lg border-white/[0.1] bg-white/[0.05] hover:bg-white/[0.1]"
-                >
-                  <Link href="/login">Login</Link>
-                </Button>
                 <Button
                   asChild
                   className="w-full rounded-lg bg-gradient-to-r from-primary/90 to-primary/70 hover:from-primary hover:to-primary/80"

@@ -33,7 +33,6 @@ const navigation = [
   { name: "Clients", href: "/dashboard/clients", icon: Users },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart2 },
   { name: "Payments", href: "/dashboard/payments", icon: Wallet },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 export function MobileNav() {
@@ -51,10 +50,13 @@ export function MobileNav() {
           <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="pl-1 pr-0">
+      <SheetContent side="left" className="w-52 pl-1 pr-0">
         <SheetHeader>
           <SheetTitle className="text-2xl font-bold">
-            <Link href="/dashboard" className="pl-2 flex items-center space-x-2">
+            <Link
+              href="/dashboard"
+              className="pl-2 flex items-center space-x-2"
+            >
               <Image
                 src="/lunariss.svg"
                 alt="Lunariss"

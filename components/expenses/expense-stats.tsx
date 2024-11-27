@@ -18,7 +18,6 @@ export function ExpenseStats() {
     averageExpense: 0,
     monthlyChange: 0,
   });
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchStats() {
@@ -29,8 +28,6 @@ export function ExpenseStats() {
         setStats(data);
       } catch (error) {
         console.error("Error fetching expense stats:", error);
-      } finally {
-        setIsLoading(false);
       }
     }
 

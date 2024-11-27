@@ -7,8 +7,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 });
 
 const PLAN_PRICES = {
-  price_starter: "price_1QN7pZL14OIVwNjUYL2eyUvX",
-  price_professional: "price_1QN7pwL14OIVwNjUe57fgtzG",
+  free_trial: "price_1QPNU8L14OIVwNjUZ3aWWQjC",
+  price_professional: "price_1QPNUYL14OIVwNjUjgAed5X6",
   price_enterprise: "price_enterprise123",
 };
 
